@@ -28,8 +28,17 @@ class _HomePageState extends State<HomePage> {
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title:Card(
+                return Card(
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage("${listAlbumViewModel.albums?[index].album?.artworkUrl60}")
+                      ),
+                      title: Text("${listAlbumViewModel.albums?[index].album?.collectionName}"),
+                      subtitle: Text("${listAlbumViewModel.albums?[index].album?.artistName}"),
+                      trailing: Icon(Icons.more_vert),
+                      isThreeLine: true,
+                    ),
+                  /*Card(
                 child: Padding(
                 padding:EdgeInsets.all(8),
                 child: Row(
@@ -49,7 +58,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 )
-                ),
+                ),*/
                 );
               }
               );
