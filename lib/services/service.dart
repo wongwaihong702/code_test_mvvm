@@ -11,7 +11,8 @@ class Service{
       final json = jsonDecode(response.body) as Map<String, dynamic>;
       final jsonResult = json["results"];
       final listResult = jsonResult.map((e) => AlbumModel.fromJson(e)).toList();
-      return listResult;
+      List<AlbumModel> listAlbumModel = listResult.cast<AlbumModel>();
+      return listAlbumModel;
     }
     else{
       throw Exception('Fail to fetch albums');

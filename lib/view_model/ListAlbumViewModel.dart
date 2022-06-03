@@ -4,9 +4,9 @@ import 'package:code_test_mvvm/services/service.dart';
 class ListAlbumViewModel{
   List<AlbumViewModel>? albums;
 
-  Future<void> fetAlbum() async{
+  Future<void> fetchAlbums() async{
     final apiResult = await Service().fetchAlbumAPI();
-    this.albums = apiResult.map((e) => AlbumViewModel(e)).toList();
+    albums = apiResult.map((e) => AlbumViewModel(e)).toList();
   }
 }
 

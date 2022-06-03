@@ -89,4 +89,8 @@ class AlbumModel {
     data['primaryGenreName'] = this.primaryGenreName;
     return data;
   }
+
+  String getArtistName(){
+      return artistName??"";
+  }
 }
