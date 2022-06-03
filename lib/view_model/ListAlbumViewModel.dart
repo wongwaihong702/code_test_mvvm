@@ -8,10 +8,19 @@ class ListAlbumViewModel{
     final apiResult = await Service().fetchAlbumAPI();
     albums = apiResult.map((e) => AlbumViewModel(e)).toList();
   }
+
+  Future<int> getLength() async{
+    final apiResult = await Service().fetchAlbumAPI();
+    return apiResult.length;
+  }
 }
 
 class AlbumViewModel{
   final AlbumModel? album;
 
   AlbumViewModel(this.album);
+
+  Stream<bool> getBookmark() async*{
+    yield album?.bookmarked == true;
+  }
 }

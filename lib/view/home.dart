@@ -13,12 +13,13 @@ class _HomePageState extends State<HomePage> {
 
   ListAlbumViewModel listAlbumViewModel = new ListAlbumViewModel();
   bool _showBookmark = false;
-  List<AlbumModel> bookmarkedViewModel = [];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    
 
     listAlbumViewModel.fetchAlbums().then((result){
       setState(() {
@@ -38,11 +39,10 @@ class _HomePageState extends State<HomePage> {
         child: GestureDetector(
           onTap: () {_showBookmark = false;
           setState(() {});},
-          child: const Text("ALL", 
-            style: TextStyle(
-              fontSize: 23,
-              height: 2,
-            ),),
+          child: const Icon(
+            Icons.book,
+            size: 26.0,
+          ),
         )
     )
         ,
@@ -52,16 +52,24 @@ class _HomePageState extends State<HomePage> {
           onTap: () {_showBookmark = true;
           setState(() {});},
           child: const Icon(
-            Icons.star,
+            Icons.bookmark_added_sharp,
             size: 26.0,
-            color: Colors.yellow,
           ),
         )
     )
         ]),
-      body: ListView.builder(
-              itemCount: listAlbumViewModel.albums?.length,
-              //itemCount: 50,
+      body:FutureBuilder(
+        future: listAlbumViewModel.getLength(),
+        builder: (BuildContext context, AsyncSnapshot snapshot){
+          if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasError) {
+            return Text("Error: ${snapshot.error}");
+          } else {
+            return 
+          
+        ListView.builder(
+              //itemCount: listAlbumViewModel.albums?.length,
+              itemCount: snapshot.data,
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               itemBuilder: (context, index) {
@@ -81,15 +89,13 @@ class _HomePageState extends State<HomePage> {
                       Text("${listAlbumViewModel.albums?[index].album?.artistName}"),
                       trailing: GestureDetector(
                         child: (listAlbumViewModel.albums?[index].album?.bookmarked == false)
-                          ? Icon(Icons.star_border_purple500_sharp, color: Colors.black,)
-                          : Icon(Icons.star, color: Colors.yellow,),
+                          ? Icon(Icons.bookmark_add_sharp, color: Colors.black,)
+                          : Icon(Icons.bookmark_added_sharp, color: Colors.blue,),
                         onTap: ()  {
                           listAlbumViewModel.albums?[index].album?.toggleBookmark();
                           print("${listAlbumViewModel.albums?[index].album?.collectionName} has been tapped");
                           print(listAlbumViewModel.albums?[index].album?.bookmarked);
-                          setState(() {
-                            
-                          });
+                          setState(() {});
                         },
                         ),
                       isThreeLine: true,
@@ -97,7 +103,14 @@ class _HomePageState extends State<HomePage> {
                  ),visible:!_showBookmark || listAlbumViewModel.albums?[index].album?.bookmarked == _showBookmark,
                 );
               }
-              )
+              );
+              }
+        }
+        else{
+                return Text("Loading");
+              }
+        }
+        ) 
         );
   }
 }
