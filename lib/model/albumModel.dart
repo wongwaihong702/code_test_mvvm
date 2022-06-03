@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 class AlbumModel {
   String? wrapperType;
   String? collectionType;
@@ -19,6 +21,7 @@ class AlbumModel {
   String? currency;
   String? releaseDate;
   String? primaryGenreName;
+  bool? bookmarked = false;
 
   AlbumModel(
       {this.wrapperType,
@@ -40,7 +43,8 @@ class AlbumModel {
       this.country,
       this.currency,
       this.releaseDate,
-      this.primaryGenreName});
+      this.primaryGenreName,
+      this.bookmarked});
 
   AlbumModel.fromJson(Map<String, dynamic> json) {
     wrapperType = json['wrapperType'];
@@ -90,7 +94,8 @@ class AlbumModel {
     return data;
   }
 
-  String getArtistName(){
-      return artistName??"";
+  void toggleBookmark(){
+    bookmarked = !bookmarked!;
+    return;
   }
 }
