@@ -1,4 +1,4 @@
-import 'package:code_test_mvvm/model/albumModel.dart';
+import 'package:code_test_mvvm/model/AlbumModel.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
