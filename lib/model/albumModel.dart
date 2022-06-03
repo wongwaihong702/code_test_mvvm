@@ -1,4 +1,4 @@
-class albumModel {
+class AlbumModel {
   String? wrapperType;
   String? collectionType;
   int? artistId;
@@ -20,7 +20,7 @@ class albumModel {
   String? releaseDate;
   String? primaryGenreName;
 
-  albumModel(
+  AlbumModel(
       {this.wrapperType,
       this.collectionType,
       this.artistId,
@@ -42,7 +42,7 @@ class albumModel {
       this.releaseDate,
       this.primaryGenreName});
 
-  albumModel.fromJson(Map<String, dynamic> json) {
+  AlbumModel.fromJson(Map<String, dynamic> json) {
     wrapperType = json['wrapperType'];
     collectionType = json['collectionType'];
     artistId = json['artistId'];
